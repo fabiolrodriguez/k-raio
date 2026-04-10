@@ -1,5 +1,10 @@
+res://scenes/level/level.tscn
+res://scenes/level/level.gd
+res://scripts/enemy.gd
 res://scenes/player/player.tscn
 res://scripts/player.gd
-res://scripts/enemy.gd
 res://scenes/enemy/enemy.tscn
-res://scenes/level/level.tscn
+res://scenes/pause_menu/pause_menu.tscn
+res://scripts/pause_menu.gd
+res://scenes/enemy/enemy_bullet.tscn
+res://scripts/enemy_bullet.gd

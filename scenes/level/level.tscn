@@ -7,6 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://dap3o436pbq6y" path="res://scenes/pause_menu/pause_menu.tscn" id="4_qkmgm"]
 [ext_resource type="PackedScene" uid="uid://c63nwudgs5mmv" path="res://scenes/enemy/spawn_manager.tscn" id="5_hnne4"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpf64"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpf64"]
+bg_color = Color(0.9607843, 0.69411767, 0.19215687, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9607843, 0.69411767, 0.19215687, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcngd"]
+bg_color = Color(0.8117647, 0.5764706, 0.09019608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xv074"]
+bg_color = Color(0.99469763, 0.8058638, 0.50832, 1)
+
 [node name="level" type="Node2D" unique_id=281017384]
 script = ExtResource("1_i166f")
 
@@ -31,3 +47,76 @@ scale = Vector2(1.5, 1.5)
 [node name="PauseMenu" parent="." unique_id=264194249 instance=ExtResource("4_qkmgm")]
 
 [node name="SpawnManager" parent="." unique_id=1053329477 instance=ExtResource("5_hnne4")]
+
+[node name="gameover" type="CanvasLayer" parent="." unique_id=1631986778]
+process_mode = 3
+
+[node name="gameoverpanel" type="PanelContainer" parent="gameover" unique_id=1191403590]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vpf64")
+
+[node name="MarginContainer" type="MarginContainer" parent="gameover/gameoverpanel" unique_id=1610188644]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gameover/gameoverpanel/MarginContainer" unique_id=818505812]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer" unique_id=2146873950]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82996494, 0, 0.17735049, 1)
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer" unique_id=209065399]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer" unique_id=1703872965]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="restart" type="Button" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2147337456]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_colors/font_hover_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vpf64")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wcngd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xv074")
+text = "RESTART"
+
+[node name="quit" type="Button" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2013809310]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_colors/font_hover_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vpf64")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wcngd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xv074")
+text = "QUIT"
+
+[connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]

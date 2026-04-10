@@ -1,14 +1,14 @@
 extends Node2D
 
 @onready var pause_menu = $PauseMenu
+@onready var score_label = $scorelayer/scorelabel
+@onready var game_over_menu = $gameover
+@onready var restart_button = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart
+var score := 0
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	update_score_ui()
+	game_over_menu.visible=false
 func _process(delta: float) -> void:
 	pass
 
@@ -19,7 +19,26 @@ func _input(event):
 func toggle_pause():
 	if get_tree().paused:
 		pause_menu.resume()
-		#menu_panel.visible = true
 	else:
 		pause_menu.pause()
-		#menu_panel.visible = false
+
+func add_score(amount: int):
+	score += amount
+	update_score_ui()
+
+func update_score_ui():
+	score_label.text = "SCORE %d" % score
+
+func game_over():
+	get_tree().paused
+	game_over_menu.visible = true
+	restart_button.grab_focus()
+
+func _on_quit_pressed() -> void:
+	AudioManager.play_click()
+	get_tree().quit()
+
+func _on_restart_pressed() -> void:
+	AudioManager.play_click()
+	game_over_menu.visible = true
+	get_tree().reload_current_scene()	

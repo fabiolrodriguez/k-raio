@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bg6k1vi047rnd" path="res://assets/textures/enemyRed1.png" id="1_4a83h"]
 [ext_resource type="Script" uid="uid://deng82eidr1d3" path="res://scripts/enemy.gd" id="1_a3pup"]
+[ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_40wdo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 44.28318
@@ -10,6 +11,7 @@ radius = 44.28318
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_a3pup")
+enemy_bullet_scene = ExtResource("2_40wdo")
 
 [node name="enemy" type="Sprite2D" parent="." unique_id=659411881]
 texture = ExtResource("1_4a83h")
@@ -17,5 +19,12 @@ texture = ExtResource("1_4a83h")
 [node name="collider" type="CollisionShape2D" parent="." unique_id=1929448390]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_a3pup")
+
+[node name="shootpoint" type="Marker2D" parent="." unique_id=1698395269]
+position = Vector2(0, 38)
+
+[node name="shoottimer" type="Timer" parent="." unique_id=1803244454]
+wait_time = 1.5
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -47,10 +47,15 @@ func shoot():
 
 func reset_fire():
 	can_shoot = true
-	
+
 func die():
 	if is_dead:
 		return
+
 	is_dead = true
+
+	var game = get_tree().current_scene
+	if game != null and game.has_method("game_over"):
+		game.game_over()
+
 	queue_free()
-	get_tree().reload_current_scene()	
