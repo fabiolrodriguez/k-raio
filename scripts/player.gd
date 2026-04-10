@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var shoot_point = $shootpoint
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 0.2
+var is_dead := false
 
 var can_shoot := true
 
@@ -42,6 +43,14 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = shoot_point.global_position
+	AudioManager.play_shoot()
 
 func reset_fire():
-	can_shoot = true	
+	can_shoot = true
+	
+func die():
+	if is_dead:
+		return
+	is_dead = true
+	queue_free()
+	get_tree().reload_current_scene()	
