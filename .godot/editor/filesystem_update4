@@ -1,7 +1,2 @@
-res://scenes/enemy/enemy.tscn
-res://scripts/enemy_bullet.gd
-res://scripts/enemy.gd
-res://scenes/enemy/enemydiag.tscn
-res://scripts/enemydiag.gd
 res://scenes/enemy/spawn_manager.tscn
 res://scripts/spawn_manager.gd
