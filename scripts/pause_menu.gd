@@ -15,7 +15,7 @@ func resume():
 	AudioManager.play_click()
 	get_tree().paused = false
 	visible = false
-	get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/level/level.tscn")
 
 func _on_resume_pressed() -> void:
 	resume()

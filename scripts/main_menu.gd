@@ -117,6 +117,7 @@ func sync_settings_ui():
 
 func _on_start_pressed() -> void:
 	AudioManager.play_click()
+	get_tree().change_scene_to_file("res://scenes//level/level.tscn")
 func _on_start_mouse_entered() -> void:
 	AudioManager.play_hover()
 func _on_start_focus_entered() -> void:

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://w57g2ubn0bwi"]
+
+[ext_resource type="Script" uid="uid://bk3eqabhw6xy6" path="res://scripts/player.gd" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://cwa6srqygup2p" path="res://assets/textures/passaralho.png" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://cfs06d8nvl8l8" path="res://scenes/player/bullet.tscn" id="2_gmlin"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
+radius = 16.0
+height = 66.0
+
+[node name="player" type="CharacterBody2D" unique_id=1144793056]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_8afob")
+bullet_scene = ExtResource("2_gmlin")
+
+[node name="texture" type="Sprite2D" parent="." unique_id=94469378]
+texture = ExtResource("2_dovo2")
+
+[node name="collider" type="CollisionShape2D" parent="." unique_id=1020706002]
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_dovo2")
+
+[node name="shootpoint" type="Marker2D" parent="." unique_id=2077615094]
+position = Vector2(-1, -30)
