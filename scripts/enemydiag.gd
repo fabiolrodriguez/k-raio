@@ -2,13 +2,15 @@ extends Area2D
 
 @export var speed: float = 120.0
 @export var hp: int = 1
-@export var score_value: int = 100
-
+@export var destroy_sound: AudioStream
+@export var score_value: int = 150
 @export var enemy_bullet_scene: PackedScene
-@export var can_shoot: bool = true
 
 @onready var shoot_point = $shootpoint
 @onready var shoot_timer = $shoottimer
+
+func _ready():
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
 func _process(delta):
 	global_position.y += speed * delta
@@ -18,10 +20,9 @@ func _process(delta):
 
 func take_damage(amount: int = 1):
 	hp -= amount
-
 	if hp <= 0:
 		die(true)
-	
+
 func die(give_score: bool = true):
 	AudioManager.play_explode()
 
@@ -32,31 +33,21 @@ func die(give_score: bool = true):
 
 	queue_free()
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("die"):
-		body.die()
-		die(false)
-
-func _ready():
-	if can_shoot:
-		shoot_timer.timeout.connect(_on_shoot_timer_timeout)
-	else:
-		shoot_timer.stop()
-		
 func shoot():
 	if enemy_bullet_scene == null:
 		return
 
-	#var bullet = enemy_bullet_scene.instantiate()
-	#get_tree().current_scene.add_child(bullet)
-	#bullet.global_position = shoot_point.global_position
+	# tiro esquerda
+	var bullet_left = enemy_bullet_scene.instantiate()
+	get_tree().current_scene.add_child(bullet_left)
+	bullet_left.global_position = shoot_point.global_position
+	bullet_left.direction = Vector2(-0.5, 1).normalized()
 
-	var bullet = enemy_bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
-
-	bullet.global_position = shoot_point.global_position
-	bullet.direction = Vector2.DOWN
-
+	# tiro direita
+	var bullet_right = enemy_bullet_scene.instantiate()
+	get_tree().current_scene.add_child(bullet_right)
+	bullet_right.global_position = shoot_point.global_position
+	bullet_right.direction = Vector2(0.5, 1).normalized()
+	
 func _on_shoot_timer_timeout():
-	shoot()
-		
+	shoot()	

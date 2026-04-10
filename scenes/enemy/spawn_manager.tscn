@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c63nwudgs5mmv"]
 
 [ext_resource type="Script" uid="uid://c6biiwfts6oxg" path="res://scripts/spawn_manager.gd" id="1_3ht1b"]
-[ext_resource type="PackedScene" uid="uid://c2ul44mm8678v" path="res://scenes/enemy/enemy.tscn" id="2_y6h1u"]
+[ext_resource type="PackedScene" uid="uid://bhrrlrqgh3v3" path="res://scenes/enemy/enemydiag.tscn" id="2_y6h1u"]
 
 [node name="SpawnManager" type="Node2D" unique_id=1053329477]
 script = ExtResource("1_3ht1b")

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c2ul44mm8678v"]
+[gd_scene format=3 uid="uid://bhrrlrqgh3v3"]
 
-[ext_resource type="Script" uid="uid://deng82eidr1d3" path="res://scripts/enemy.gd" id="1_a3pup"]
-[ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_40wdo"]
-[ext_resource type="Texture2D" uid="uid://dey8itsixm27f" path="res://assets/textures/Pombo.png" id="3_40wdo"]
+[ext_resource type="Script" uid="uid://os858so1eyw2" path="res://scripts/enemydiag.gd" id="1_jnesn"]
+[ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_1s7nw"]
+[ext_resource type="Texture2D" uid="uid://dey8itsixm27f" path="res://assets/textures/Pombo.png" id="3_tq3bj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 39.051247
@@ -10,12 +10,12 @@ radius = 39.051247
 [node name="enemy" type="Area2D" unique_id=581839579]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_a3pup")
-enemy_bullet_scene = ExtResource("2_40wdo")
+script = ExtResource("1_jnesn")
+enemy_bullet_scene = ExtResource("2_1s7nw")
 
 [node name="enemy" type="Sprite2D" parent="." unique_id=609644464]
 scale = Vector2(1.3, 1.3)
-texture = ExtResource("3_40wdo")
+texture = ExtResource("3_tq3bj")
 
 [node name="collider" type="CollisionShape2D" parent="." unique_id=1929448390]
 position = Vector2(0, -2)
@@ -25,7 +25,7 @@ shape = SubResource("CircleShape2D_a3pup")
 position = Vector2(0, 38)
 
 [node name="shoottimer" type="Timer" parent="." unique_id=1803244454]
-wait_time = 1.5
+wait_time = 2.0
 autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

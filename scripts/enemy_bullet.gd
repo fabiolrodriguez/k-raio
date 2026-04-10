@@ -1,10 +1,12 @@
 extends Area2D
 
 @export var speed: float = 250.0
+var direction: Vector2 = Vector2.DOWN
 
 func _process(delta):
-	global_position.y += speed * delta
-
+	#global_position.y += speed * delta
+	global_position += direction * speed * delta
+	
 	if global_position.y > get_viewport_rect().size.y + 32:
 		queue_free()
 
