@@ -4,7 +4,17 @@ extends Node2D
 @onready var score_label = $scorelayer/scorelabel
 @onready var game_over_menu = $gameover
 @onready var restart_button = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart
+@onready var quit_button = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/quit
+
 var score := 0
+
+func update_texts():
+
+	pause_menu.resume_button.text = LocalizationManager.tr_key("menu_resume")
+	pause_menu.quit_button.text = LocalizationManager.tr_key("menu_quit")
+	restart_button = LocalizationManager.tr_key("menu_restart")
+	quit_button = LocalizationManager.tr_key("menu_quit")
+	# adicione outros botões aqui
 
 func _ready() -> void:
 	update_score_ui()

@@ -1,7 +1,8 @@
-res://scenes/player/upgrade.tscn
+res://scenes/player/player.tscn
+res://scripts/player.gd
 res://scripts/enemy.gd
 res://scripts/enemydiag.gd
-res://scenes/enemy/enemydiag.tscn
-res://scripts/player.gd
-res://scenes/player/player.tscn
-res://scripts/upgrade.gd
+res://scenes/level/level.tscn
+res://scenes/level/level.gd
+res://scenes/main_menu/main_menu.tscn
+res://scripts/localization_manager.gd

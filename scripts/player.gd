@@ -20,9 +20,11 @@ var base_fire_rate: float = 0.2
 var base_speed: float = 250.0
 var shield_charges := 0
 
+@onready var shield_sprite = $shield
+
 func _ready():
 	screen_size = get_viewport_rect().size
-
+	shield_sprite.visible = false
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 
@@ -66,7 +68,8 @@ func die():
 	if shield_charges > 0:
 		shield_charges -= 1
 		on_shield_hit()
-		return		
+		update_shield_visual()
+		return
 
 	is_dead = true
 
@@ -83,7 +86,8 @@ func apply_upgrade(upgrade_id: String):
 	upgrades[upgrade_id] += 1
 	
 	if upgrade_id == "shield":
-		shield_charges += 1	
+		shield_charges += 1
+		update_shield_visual()
 	
 	recalculate_upgrades()
 	print("Upgrade aplicado:", upgrade_id)
@@ -106,3 +110,9 @@ func on_shield_hit():
 	print("Shield absorveu o dano!")
 
 	# aqui podemos adicionar efeito visual depois	
+	
+func update_shield_visual():
+	if shield_sprite == null:
+		return
+
+	shield_sprite.visible = shield_charges > 0	

@@ -10,7 +10,7 @@ extends Area2D
 @onready var shoot_timer = $shoottimer
 
 @export var upgrade_pickup_scene: PackedScene
-@export var drop_chance: float = 0.2
+@export var drop_chance: float = 1
 @export var possible_upgrades: Array[String] = ["spread_shot", "speed_up", "fire_rate", "shield"]
 
 

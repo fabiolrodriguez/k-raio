@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6k6pe23cs7x8" path="res://assets/textures/Passaralho2.png" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dsrqwj1h54pnn" path="res://assets/textures/Flame2.png" id="4_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bf8xclesmflel" path="res://assets/textures/Flame.png" id="5_75vfm"]
+[ext_resource type="Texture2D" uid="uid://c3bkjjq6cp3vt" path="res://assets/textures/shield.png" id="6_75vfm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 16.0
@@ -44,3 +45,6 @@ position = Vector2(0, -30)
 position = Vector2(-2, 44)
 sprite_frames = SubResource("SpriteFrames_0owmy")
 autoplay = "default"
+
+[node name="shield" type="Sprite2D" parent="." unique_id=524432086]
+texture = ExtResource("6_75vfm")
