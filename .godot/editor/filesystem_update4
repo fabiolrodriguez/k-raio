@@ -1,2 +1,7 @@
-res://scenes/enemy/spawn_manager.tscn
-res://scripts/spawn_manager.gd
+res://scenes/enemy/enemydiag.tscn
+res://scripts/bullet.gd
+res://scripts/player.gd
+res://scenes/player/upgrade.tscn
+res://scripts/upgrade.gd
+res://scenes/level/level.tscn
+res://scenes/player/player.tscn

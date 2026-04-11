@@ -86,6 +86,7 @@ ui_down={
 2d_physics/layer_3="shoot"
 2d_physics/layer_4="enemy"
 2d_physics/layer_5="enemybullet"
+2d_physics/layer_6="upgrade"
 
 [physics]
 

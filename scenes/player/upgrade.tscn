@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bjh12ow4nv6oc"]
+
+[ext_resource type="Texture2D" uid="uid://b0dko2jaq6y6d" path="res://assets/textures/multishot.png" id="1_mt44h"]
+[ext_resource type="Script" uid="uid://dvjeiw2kkcvgc" path="res://scripts/upgrade.gd" id="1_unown"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mt44h"]
+radius = 32.0
+height = 64.0
+
+[node name="upgrade" type="Area2D" unique_id=1275732258]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_unown")
+
+[node name="upgrade" type="Sprite2D" parent="." unique_id=142368657]
+texture = ExtResource("1_mt44h")
+
+[node name="collider" type="CollisionShape2D" parent="." unique_id=207507678]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_mt44h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
