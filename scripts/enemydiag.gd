@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 120.0
+@export var speed: float = 140.0
 @export var hp: int = 1
 @export var destroy_sound: AudioStream
 @export var score_value: int = 150
@@ -11,7 +11,7 @@ extends Area2D
 
 @export var upgrade_pickup_scene: PackedScene
 @export var drop_chance: float = 0.2
-@export var possible_upgrades: Array[String] = ["spread_shot", "speed_up"]
+@export var possible_upgrades: Array[String] = ["spread_shot", "speed_up", "fire_rate", "shield"]
 
 
 func _ready():

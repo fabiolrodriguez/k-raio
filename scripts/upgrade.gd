@@ -7,7 +7,7 @@ extends Area2D
 var upgrade_colors = {
 	"spread_shot": Color(1.0, 0.3, 0.3),   # vermelho
 	"speed_up": Color(0.3, 0.8, 1.0),      # azul claro
-	"fire_rate": Color(1.0, 0.9, 0.3),     # amarelo
+	"fire_rate": Color(1.0, 1.0, 0.161, 1.0),     # amarelo
 	"shield": Color(0.4, 1.0, 0.5)         # verde
 }
 

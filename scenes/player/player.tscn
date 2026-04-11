@@ -1,12 +1,28 @@
 [gd_scene format=3 uid="uid://w57g2ubn0bwi"]
 
 [ext_resource type="Script" uid="uid://bk3eqabhw6xy6" path="res://scripts/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://cwa6srqygup2p" path="res://assets/textures/passaralho.png" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cfs06d8nvl8l8" path="res://scenes/player/bullet.tscn" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://6k6pe23cs7x8" path="res://assets/textures/Passaralho2.png" id="3_gmlin"]
+[ext_resource type="Texture2D" uid="uid://dsrqwj1h54pnn" path="res://assets/textures/Flame2.png" id="4_p47bc"]
+[ext_resource type="Texture2D" uid="uid://bf8xclesmflel" path="res://assets/textures/Flame.png" id="5_75vfm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 16.0
 height = 66.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0owmy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_p47bc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_75vfm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="player" type="CharacterBody2D" unique_id=1144793056]
 collision_layer = 2
@@ -15,11 +31,16 @@ script = ExtResource("1_8afob")
 bullet_scene = ExtResource("2_gmlin")
 
 [node name="texture" type="Sprite2D" parent="." unique_id=94469378]
-texture = ExtResource("2_dovo2")
+texture = ExtResource("3_gmlin")
 
 [node name="collider" type="CollisionShape2D" parent="." unique_id=1020706002]
-position = Vector2(-1, 1)
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="shootpoint" type="Marker2D" parent="." unique_id=2077615094]
-position = Vector2(-1, -30)
+position = Vector2(0, -30)
+
+[node name="flame" type="AnimatedSprite2D" parent="." unique_id=1588495887]
+position = Vector2(-2, 44)
+sprite_frames = SubResource("SpriteFrames_0owmy")
+autoplay = "default"

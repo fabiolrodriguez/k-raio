@@ -12,11 +12,13 @@ var screen_size: Vector2
 var upgrades = {
 	"spread_shot": 0,
 	"fire_rate": 0,
-	"speed_up": 0
+	"speed_up": 0,
+	"shield": 0
 }
 
 var base_fire_rate: float = 0.2
 var base_speed: float = 250.0
+var shield_charges := 0
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -59,6 +61,12 @@ func reset_fire():
 func die():
 	if is_dead:
 		return
+		
+	# verifica shield antes de morrer
+	if shield_charges > 0:
+		shield_charges -= 1
+		on_shield_hit()
+		return		
 
 	is_dead = true
 
@@ -73,6 +81,10 @@ func apply_upgrade(upgrade_id: String):
 		upgrades[upgrade_id] = 0
 
 	upgrades[upgrade_id] += 1
+	
+	if upgrade_id == "shield":
+		shield_charges += 1	
+	
 	recalculate_upgrades()
 	print("Upgrade aplicado:", upgrade_id)
 	print("Velocidade atual:", speed)
@@ -88,4 +100,9 @@ func spawn_player_bullet(direction: Vector2, x_offset: float = 0.0):
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = shoot_point.global_position + Vector2(x_offset, 0)
-	bullet.direction = direction.normalized()		
+	bullet.direction = direction.normalized()
+	
+func on_shield_hit():
+	print("Shield absorveu o dano!")
+
+	# aqui podemos adicionar efeito visual depois	
