@@ -34,6 +34,7 @@ script = ExtResource("1_a3pup")
 enemy_bullet_scene = ExtResource("2_40wdo")
 upgrade_pickup_scene = ExtResource("3_cwlon")
 drop_chance = 0.1
+possible_upgrades = Array[String](["spread_shot", "speed_up"])
 
 [node name="enemy" type="AnimatedSprite2D" parent="." unique_id=682130548]
 scale = Vector2(1.3, 1.3)

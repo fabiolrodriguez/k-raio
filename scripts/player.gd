@@ -74,7 +74,9 @@ func apply_upgrade(upgrade_id: String):
 
 	upgrades[upgrade_id] += 1
 	recalculate_upgrades()
-
+	print("Upgrade aplicado:", upgrade_id)
+	print("Velocidade atual:", speed)
+	
 func recalculate_upgrades():
 	fire_rate = max(0.05, base_fire_rate - (upgrades["fire_rate"] * 0.03))
 	speed = base_speed + (upgrades["speed_up"] * 30.0)

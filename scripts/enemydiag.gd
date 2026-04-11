@@ -11,7 +11,7 @@ extends Area2D
 
 @export var upgrade_pickup_scene: PackedScene
 @export var drop_chance: float = 0.2
-@export var possible_upgrades: Array[String] = ["spread_shot"]
+@export var possible_upgrades: Array[String] = ["spread_shot", "speed_up"]
 
 
 func _ready():
@@ -74,4 +74,7 @@ func try_drop_upgrade():
 	pickup.global_position = global_position
 
 	var random_upgrade = possible_upgrades.pick_random()
-	pickup.upgrade_id = random_upgrade	
+	pickup.upgrade_id = random_upgrade
+	
+	if pickup.has_method("apply_visual"):
+		pickup.apply_visual()	

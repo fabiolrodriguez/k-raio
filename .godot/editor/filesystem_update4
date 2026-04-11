@@ -1,5 +1,7 @@
 res://scenes/enemy/enemy.tscn
-res://scripts/enemy.gd
 res://scenes/enemy/enemydiag.tscn
+res://scripts/enemy.gd
 res://scripts/enemydiag.gd
-res://scenes/level/level.tscn
+res://scripts/player.gd
+res://scenes/player/upgrade.tscn
+res://scripts/upgrade.gd
