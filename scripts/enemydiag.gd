@@ -9,6 +9,11 @@ extends Area2D
 @onready var shoot_point = $shootpoint
 @onready var shoot_timer = $shoottimer
 
+@export var upgrade_pickup_scene: PackedScene
+@export var drop_chance: float = 0.2
+@export var possible_upgrades: Array[String] = ["spread_shot"]
+
+
 func _ready():
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
@@ -30,6 +35,8 @@ func die(give_score: bool = true):
 		var game = get_tree().current_scene
 		if game != null and game.has_method("add_score"):
 			game.add_score(score_value)
+		
+		try_drop_upgrade()
 
 	queue_free()
 
@@ -51,3 +58,20 @@ func shoot():
 	
 func _on_shoot_timer_timeout():
 	shoot()	
+	
+func try_drop_upgrade():
+	if upgrade_pickup_scene == null:
+		return
+
+	if possible_upgrades.is_empty():
+		return
+
+	if randf() > drop_chance:
+		return
+
+	var pickup = upgrade_pickup_scene.instantiate()
+	get_tree().current_scene.add_child(pickup)
+	pickup.global_position = global_position
+
+	var random_upgrade = possible_upgrades.pick_random()
+	pickup.upgrade_id = random_upgrade	

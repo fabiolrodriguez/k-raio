@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://b2ikk0lshckln" path="res://assets/fonts/PublicPixel-rv0pA.ttf" id="2_vpf64"]
 [ext_resource type="PackedScene" uid="uid://dap3o436pbq6y" path="res://scenes/pause_menu/pause_menu.tscn" id="4_qkmgm"]
 [ext_resource type="PackedScene" uid="uid://c63nwudgs5mmv" path="res://scenes/enemy/spawn_manager.tscn" id="5_hnne4"]
-[ext_resource type="PackedScene" uid="uid://bjh12ow4nv6oc" path="res://scenes/player/upgrade.tscn" id="7_wcngd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpf64"]
 
@@ -118,9 +117,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_vpf64")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wcngd")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xv074")
 text = "QUIT"
-
-[node name="upgrade" parent="." unique_id=1275732258 instance=ExtResource("7_wcngd")]
-position = Vector2(534, 1)
 
 [connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]

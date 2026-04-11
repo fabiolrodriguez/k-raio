@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://deng82eidr1d3" path="res://scripts/enemy.gd" id="1_a3pup"]
 [ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_40wdo"]
 [ext_resource type="Texture2D" uid="uid://dey8itsixm27f" path="res://assets/textures/Pombo.png" id="3_40wdo"]
+[ext_resource type="PackedScene" uid="uid://bjh12ow4nv6oc" path="res://scenes/player/upgrade.tscn" id="3_cwlon"]
 [ext_resource type="Texture2D" uid="uid://b2iqeai6f0pes" path="res://assets/textures/Pombo2.png" id="4_gl05p"]
 [ext_resource type="Texture2D" uid="uid://cuq1p6aousc87" path="res://assets/textures/Pombo3.png" id="5_cwlon"]
 
@@ -31,6 +32,8 @@ collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_a3pup")
 enemy_bullet_scene = ExtResource("2_40wdo")
+upgrade_pickup_scene = ExtResource("3_cwlon")
+drop_chance = 0.1
 
 [node name="enemy" type="AnimatedSprite2D" parent="." unique_id=682130548]
 scale = Vector2(1.3, 1.3)
