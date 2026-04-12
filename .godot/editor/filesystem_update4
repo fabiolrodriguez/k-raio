@@ -1,4 +1,6 @@
+res://scenes/enemy/enemydiag.tscn
+res://scenes/enemy/enemysuicide.tscn
+res://scripts/enemysuicide.gd
 res://scenes/level/level.tscn
-res://scenes/level/level.gd
-res://scripts/player.gd
-res://scenes/enemy/enemy.tscn
+res://scripts/spawn_manager.gd
+res://scenes/enemy/spawn_manager.tscn

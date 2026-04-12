@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c63nwudgs5mmv" path="res://scenes/enemy/spawn_manager.tscn" id="5_hnne4"]
 [ext_resource type="Texture2D" uid="uid://c14pbt7dbd3i2" path="res://assets/textures/pierceicon.png" id="5_m0bv2"]
 [ext_resource type="Texture2D" uid="uid://b67vnkjkb3fub" path="res://assets/textures/shieldicon.png" id="6_b7m21"]
+[ext_resource type="PackedScene" uid="uid://tljnm4iwkuto" path="res://scenes/enemy/enemysuicide.tscn" id="11_pe1ox"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpf64"]
 
@@ -119,6 +120,7 @@ scale = Vector2(1.5, 1.5)
 [node name="PauseMenu" parent="." unique_id=264194249 instance=ExtResource("4_qkmgm")]
 
 [node name="SpawnManager" parent="." unique_id=1053329477 instance=ExtResource("5_hnne4")]
+enemy_suicide_scene = ExtResource("11_pe1ox")
 
 [node name="gameover" type="CanvasLayer" parent="." unique_id=1631986778]
 process_mode = 3

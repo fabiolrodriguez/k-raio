@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://tljnm4iwkuto"]
+
+[ext_resource type="Script" uid="uid://bt6mtg8c1bmwg" path="res://scripts/enemysuicide.gd" id="1_k7lto"]
+[ext_resource type="Texture2D" uid="uid://cyobegxagalct" path="res://assets/textures/PomboSuicida2.png" id="2_yyjwe"]
+[ext_resource type="Texture2D" uid="uid://c2iketwcc08b3" path="res://assets/textures/PomboSuicida.png" id="3_k7lto"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tk4x4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yyjwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k7lto")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
+radius = 39.051247
+
+[node name="enemy" type="Area2D" unique_id=581839579]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_k7lto")
+
+[node name="enemy" type="AnimatedSprite2D" parent="." unique_id=243097138]
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_tk4x4")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="collider" type="CollisionShape2D" parent="." unique_id=1929448390]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_a3pup")
+
+[node name="shootpoint" type="Marker2D" parent="." unique_id=1698395269]
+position = Vector2(0, 38)
+
+[node name="shoottimer" type="Timer" parent="." unique_id=1803244454]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://c6biiwfts6oxg" path="res://scripts/spawn_manager.gd" id="1_3ht1b"]
 [ext_resource type="PackedScene" uid="uid://c2ul44mm8678v" path="res://scenes/enemy/enemy.tscn" id="2_h0gj1"]
 [ext_resource type="PackedScene" uid="uid://bhrrlrqgh3v3" path="res://scenes/enemy/enemydiag.tscn" id="2_y6h1u"]
+[ext_resource type="PackedScene" uid="uid://tljnm4iwkuto" path="res://scenes/enemy/enemysuicide.tscn" id="4_8exjm"]
 
 [node name="SpawnManager" type="Node2D" unique_id=1053329477]
 script = ExtResource("1_3ht1b")
 enemy_scene = ExtResource("2_h0gj1")
 enemy_diag = ExtResource("2_y6h1u")
+enemy_suicide_scene = ExtResource("4_8exjm")
 
 [node name="spawntimer" type="Timer" parent="." unique_id=141191074]
 wait_time = 1.5
