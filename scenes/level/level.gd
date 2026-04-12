@@ -6,6 +6,18 @@ extends Node2D
 @onready var restart_button = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart
 @onready var quit_button = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/quit
 
+@onready var spread_label = $scorelayer/upgradehud/HBoxContainer/spreadshotbox/count
+@onready var speed_label = $scorelayer/upgradehud/HBoxContainer/speedupbox/count
+@onready var fire_rate_label = $scorelayer/upgradehud/HBoxContainer/fireratebox/count
+@onready var shield_label = $scorelayer/upgradehud/HBoxContainer/shieldbox/count
+
+@onready var spread_box = $scorelayer/upgradehud/HBoxContainer/spreadshotbox
+@onready var speed_box = $scorelayer/upgradehud/HBoxContainer/speedupbox
+@onready var fire_rate_box = $scorelayer/upgradehud/HBoxContainer/fireratebox
+@onready var shield_box = $scorelayer/upgradehud/HBoxContainer/shieldbox
+
+@onready var player = $player
+
 var score := 0
 
 func update_texts():
@@ -19,6 +31,10 @@ func update_texts():
 func _ready() -> void:
 	update_score_ui()
 	game_over_menu.visible=false
+	if player != null:
+		player.upgrades_changed.connect(update_upgrade_hud)
+		
+	update_upgrade_hud()
 func _process(delta: float) -> void:
 	pass
 
@@ -51,4 +67,25 @@ func _on_quit_pressed() -> void:
 func _on_restart_pressed() -> void:
 	AudioManager.play_click()
 	game_over_menu.visible = true
-	get_tree().reload_current_scene()	
+	get_tree().reload_current_scene()
+	
+func update_upgrade_hud():
+	if player == null:
+		return
+
+	var upgrades = player.upgrades
+
+	var spread_count = upgrades.get("spread_shot", 0)
+	var speed_count = upgrades.get("speed_up", 0)
+	var fire_rate_count = upgrades.get("fire_rate", 0)
+	var shield_count = upgrades.get("shield", 0)
+
+	spread_label.text = "x%d" % spread_count
+	speed_label.text = "x%d" % speed_count
+	fire_rate_label.text = "x%d" % fire_rate_count
+	shield_label.text = "x%d" % shield_count
+
+	spread_box.visible = spread_count > 0
+	speed_box.visible = speed_count > 0
+	fire_rate_box.visible = fire_rate_count > 0
+	shield_box.visible = shield_count > 0	

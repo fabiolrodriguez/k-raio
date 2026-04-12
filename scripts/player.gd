@@ -9,6 +9,8 @@ var is_dead := false
 var can_shoot := true
 var screen_size: Vector2
 
+signal upgrades_changed
+
 var upgrades = {
 	"spread_shot": 0,
 	"fire_rate": 0,
@@ -69,6 +71,7 @@ func die():
 		shield_charges -= 1
 		on_shield_hit()
 		update_shield_visual()
+		emit_signal("upgrades_changed")
 		return
 
 	is_dead = true
@@ -92,6 +95,8 @@ func apply_upgrade(upgrade_id: String):
 	recalculate_upgrades()
 	print("Upgrade aplicado:", upgrade_id)
 	print("Velocidade atual:", speed)
+	
+	emit_signal("upgrades_changed")
 	
 func recalculate_upgrades():
 	fire_rate = max(0.05, base_fire_rate - (upgrades["fire_rate"] * 0.03))
