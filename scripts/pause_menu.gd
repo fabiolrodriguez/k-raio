@@ -5,6 +5,9 @@ extends CanvasLayer
 
 func _ready():
 	visible = false
+	update_texts()
+	if not LocalizationManager.language_changed.is_connected(update_texts):
+		LocalizationManager.language_changed.connect(update_texts)
 
 func pause():
 	visible = true
@@ -32,4 +35,6 @@ func _on_quit_pressed() -> void:
 func _on_quit_focus_entered() -> void:
 	AudioManager.play_hover()
 
-	
+func update_texts():
+	resume_button.text = LocalizationManager.tr_key("menu_resume")
+	quit_button.text = LocalizationManager.tr_key("menu_quit")

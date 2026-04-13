@@ -1,6 +1,8 @@
-res://scenes/enemy/enemydiag.tscn
-res://scenes/enemy/enemysuicide.tscn
-res://scripts/enemysuicide.gd
+res://scenes/pause_menu/pause_menu.tscn
+res://scripts/pause_menu.gd
 res://scenes/level/level.tscn
+res://scenes/level/level.gd
 res://scripts/spawn_manager.gd
+res://scenes/enemy/boss.tscn
+res://scripts/boss.gd
 res://scenes/enemy/spawn_manager.tscn

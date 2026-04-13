@@ -16,5 +16,5 @@ wait_time = 1.5
 autostart = true
 
 [node name="difficultytimer" type="Timer" parent="." unique_id=869426565]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true

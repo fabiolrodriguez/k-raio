@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bqb66yvyhiwk8"]
+
+[ext_resource type="Script" uid="uid://cvdl7vyuy53s2" path="res://scripts/boss.gd" id="1_e3jr6"]
+[ext_resource type="Texture2D" uid="uid://dbd4866pu6ldg" path="res://assets/textures/boss1.png" id="1_vefcp"]
+[ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_b0cli"]
+[ext_resource type="Texture2D" uid="uid://dcwdekqm4upvh" path="res://assets/textures/boss2.png" id="2_e3jr6"]
+[ext_resource type="Texture2D" uid="uid://t4uuapd4wglb" path="res://assets/textures/boss3.png" id="3_b0cli"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_40x6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vefcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e3jr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b0cli")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ee08l"]
+size = Vector2(184.5, 107)
+
+[node name="boss" type="Area2D" unique_id=437355384]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_e3jr6")
+enemy_bullet_scene = ExtResource("2_b0cli")
+
+[node name="texture" type="AnimatedSprite2D" parent="." unique_id=1974622876]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_40x6t")
+autoplay = "default"
+frame = 2
+frame_progress = 0.5751391
+
+[node name="collider" type="CollisionShape2D" parent="." unique_id=1934728772]
+position = Vector2(-4.75, -28.5)
+shape = SubResource("RectangleShape2D_ee08l")
+
+[node name="shootpointright" type="Marker2D" parent="." unique_id=826349383]
+position = Vector2(83, 21)
+
+[node name="shootpointleft" type="Marker2D" parent="." unique_id=25477124]
+position = Vector2(-88, 21)
+
+[node name="shootpoint" type="Marker2D" parent="." unique_id=1478975128]
+position = Vector2(-2, -10)
+
+[node name="shoottimer" type="Timer" parent="." unique_id=937594370]
+wait_time = 0.5
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

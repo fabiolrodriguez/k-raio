@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://4n4j5nf5br8d" path="res://assets/textures/bg.png" id="1_h3e3j"]
 [ext_resource type="Script" uid="uid://bddfs7am1056e" path="res://scenes/level/level.gd" id="1_i166f"]
 [ext_resource type="PackedScene" uid="uid://w57g2ubn0bwi" path="res://scenes/player/player.tscn" id="2_nbgty"]
+[ext_resource type="PackedScene" uid="uid://bqb66yvyhiwk8" path="res://scenes/enemy/boss.tscn" id="2_pe1ox"]
 [ext_resource type="FontFile" uid="uid://b2ikk0lshckln" path="res://assets/fonts/PublicPixel-rv0pA.ttf" id="2_vpf64"]
 [ext_resource type="Texture2D" uid="uid://dj25d20urebwn" path="res://assets/textures/multishoticon.png" id="3_tf2q7"]
 [ext_resource type="Texture2D" uid="uid://dak57st3g7h8r" path="res://assets/textures/speedicon.png" id="4_pe1ox"]
@@ -10,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c63nwudgs5mmv" path="res://scenes/enemy/spawn_manager.tscn" id="5_hnne4"]
 [ext_resource type="Texture2D" uid="uid://c14pbt7dbd3i2" path="res://assets/textures/pierceicon.png" id="5_m0bv2"]
 [ext_resource type="Texture2D" uid="uid://b67vnkjkb3fub" path="res://assets/textures/shieldicon.png" id="6_b7m21"]
-[ext_resource type="PackedScene" uid="uid://tljnm4iwkuto" path="res://scenes/enemy/enemysuicide.tscn" id="11_pe1ox"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpf64"]
 
@@ -30,6 +30,7 @@ bg_color = Color(0.99469763, 0.8058638, 0.50832, 1)
 
 [node name="level" type="Node2D" unique_id=281017384]
 script = ExtResource("1_i166f")
+boss_scene = ExtResource("2_pe1ox")
 
 [node name="scorelayer" type="CanvasLayer" parent="." unique_id=1844956064]
 
@@ -120,10 +121,15 @@ scale = Vector2(1.5, 1.5)
 [node name="PauseMenu" parent="." unique_id=264194249 instance=ExtResource("4_qkmgm")]
 
 [node name="SpawnManager" parent="." unique_id=1053329477 instance=ExtResource("5_hnne4")]
-enemy_suicide_scene = ExtResource("11_pe1ox")
 
 [node name="gameover" type="CanvasLayer" parent="." unique_id=1631986778]
 process_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="gameover" unique_id=256087136]
+offset_left = -23.0
+offset_right = 1320.0
+offset_bottom = 751.0
+color = Color(0, 0, 0, 0.6666667)
 
 [node name="gameoverpanel" type="PanelContainer" parent="gameover" unique_id=1191403590]
 anchors_preset = 8

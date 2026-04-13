@@ -18,14 +18,16 @@ extends Node2D
 
 @onready var player = $player
 
+@export var boss_scene: PackedScene
+@onready var spawn_manager = $SpawnManager
+
+var boss_spawned := false
+
 var score := 0
 
 func update_texts():
-
-	pause_menu.resume_button.text = LocalizationManager.tr_key("menu_resume")
-	pause_menu.quit_button.text = LocalizationManager.tr_key("menu_quit")
-	restart_button = LocalizationManager.tr_key("menu_restart")
-	quit_button = LocalizationManager.tr_key("menu_quit")
+	restart_button.text = LocalizationManager.tr_key("menu_restart")
+	quit_button.text = LocalizationManager.tr_key("menu_quit")
 	# adicione outros botões aqui
 
 func _ready() -> void:
@@ -35,6 +37,14 @@ func _ready() -> void:
 		player.upgrades_changed.connect(update_upgrade_hud)
 		
 	update_upgrade_hud()
+	update_texts()
+
+	if not LocalizationManager.language_changed.is_connected(update_texts):
+		LocalizationManager.language_changed.connect(update_texts)
+		
+	await get_tree().create_timer(60.0).timeout
+	spawn_boss()		
+			
 func _process(delta: float) -> void:
 	pass
 
@@ -89,3 +99,28 @@ func update_upgrade_hud():
 	speed_box.visible = speed_count > 0
 	fire_rate_box.visible = fire_rate_count > 0
 	shield_box.visible = shield_count > 0	
+	
+func spawn_boss():
+	if boss_scene == null:
+		return
+
+	if boss_spawned:
+		return
+
+	boss_spawned = true
+
+	if spawn_manager != null and spawn_manager.has_method("stop_spawning"):
+		spawn_manager.stop_spawning()
+
+	var boss = boss_scene.instantiate()
+	add_child(boss)
+	boss.global_position = Vector2(get_viewport_rect().size.x / 2, -120)
+
+	if boss.has_method("set_movement_origin"):
+		boss.set_movement_origin()
+
+	if boss.has_signal("boss_defeated"):
+		boss.boss_defeated.connect(_on_boss_defeated)
+		
+func _on_boss_defeated():
+	print("Boss derrotado!")		

@@ -1,10 +1,12 @@
-res://scenes/enemy/enemy.tscn::b9c3ec452046215f9c7c09fb38843f21::1775919175::res://.godot/exported/133200997/export-665b304debe985440237a95f3f724852-enemy.scn
-res://scenes/enemy/spawn_manager.tscn::51be37f6a060972ba1c45fa857226476::1775862018::res://.godot/exported/133200997/export-405e124edf23f38700d0e9ba5776c141-spawn_manager.scn
-res://scenes/level/level.tscn::a4da9ef6a156cf2310cc9673b57dbdca::1775947644::res://.godot/exported/133200997/export-f24fae1c75ddb1242ad1b542084e5848-level.scn
+res://scenes/enemy/enemy.tscn::b9c3ec452046215f9c7c09fb38843f21::1776008450::res://.godot/exported/133200997/export-665b304debe985440237a95f3f724852-enemy.scn
+res://scenes/enemy/spawn_manager.tscn::553bd6a5e0c0e8b21e958d76abaee2b5::1776040401::res://.godot/exported/133200997/export-405e124edf23f38700d0e9ba5776c141-spawn_manager.scn
+res://scenes/level/level.tscn::68f87e165543157a5d178720db2dcc3f::1776035778::res://.godot/exported/133200997/export-f24fae1c75ddb1242ad1b542084e5848-level.scn
 res://scenes/main_menu/main_menu.tscn::1125c5433c8038de6d9734111de7b4a5::1775949833::res://.godot/exported/133200997/export-c06f25764a06ba9f0130370d778d1eac-main_menu.scn
-res://scenes/pause_menu/pause_menu.tscn::e0c67277d1eb45b38ec3eb1720f99d6d::1775862018::res://.godot/exported/133200997/export-8dcdb8fda64c9e54ed68350f9a971768-pause_menu.scn
+res://scenes/pause_menu/pause_menu.tscn::468898c7b162145ec66dd603412257c1::1776028241::res://.godot/exported/133200997/export-8dcdb8fda64c9e54ed68350f9a971768-pause_menu.scn
 res://scenes/player/bullet.tscn::528de052f0712ba2a24a0e540087fab5::1775776029::res://.godot/exported/133200997/export-f55c578a2b00ff6ee83da685aa002969-bullet.scn
 res://scenes/player/player.tscn::6fc087d990782bc37a1063f7a71197c8::1775947256::res://.godot/exported/133200997/export-c2c62cb8c73458cd122faf659769dc80-player.scn
-res://scenes/enemy/enemydiag.tscn::aff1c350e4554aee9c3b2b9e94955d44::1775940239::res://.godot/exported/133200997/export-442d1534b118894a1d4699ee3c8ca4dc-enemydiag.scn
+res://scenes/enemy/enemydiag.tscn::aff1c350e4554aee9c3b2b9e94955d44::1776016092::res://.godot/exported/133200997/export-442d1534b118894a1d4699ee3c8ca4dc-enemydiag.scn
 res://scenes/enemy/enemy_bullet.tscn::cce4099037c6ff69c84ee97dc0163f9f::1775862018::res://.godot/exported/133200997/export-e9b20cabc41d95dc8d65c2788b8699fb-enemy_bullet.scn
 res://scenes/player/upgrade.tscn::e063ed33cc5004966eb7f144b46c8b57::1775939124::res://.godot/exported/133200997/export-b88a8541c366d30433a897260469610e-upgrade.scn
+res://scenes/enemy/enemysuicide.tscn::d02926120704543e6cccc6bf75954b25::1776025462::res://.godot/exported/133200997/export-cfba386fbd73277bd4076ffff35cb825-enemysuicide.scn
+res://scenes/enemy/boss.tscn::f6efbd74086e3d737f32349330fb72d0::1776040359::res://.godot/exported/133200997/export-65dc7febfce555faf9e68bdac1f051c4-boss.scn

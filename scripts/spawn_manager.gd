@@ -89,10 +89,6 @@ func spawn_suicide_enemy(enemy):
 func _on_spawn_timer_timeout():
 	spawn_enemy()
 
-#func _on_difficulty_timer_timeout():
-	#diagonal_unlocked = true
-	#spawn_timer.wait_time = 1.0
-
 var difficulty_stage := 0
 
 func _on_difficulty_timer_timeout():
@@ -107,7 +103,6 @@ func _on_difficulty_timer_timeout():
 
 	elif difficulty_stage == 2:
 		suicide_unlocked = true
-		print("entrou no if suicida")
 		spawn_timer.wait_time = 0.85
 		
 func get_random_spawn_position() -> Vector2:
