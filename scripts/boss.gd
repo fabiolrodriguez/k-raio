@@ -1,8 +1,9 @@
 extends Area2D
 
 signal boss_defeated
+signal boss_health_changed(current_hp, max_hp)
 
-@export var hp: int = 100
+@export var hp: int = 150
 @export var speed: float = 80.0
 @export var stop_y: float = 100.0
 @export var horizontal_speed: float = 80.0
@@ -19,10 +20,12 @@ signal boss_defeated
 var entered_position := false
 var moving_right := true
 var start_x := 0.0
+var max_hp: int
 
 func _ready():
 	#start_x = global_position.x
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	max_hp = hp
 
 func _process(delta):
 	if not entered_position:
@@ -43,7 +46,8 @@ func _process(delta):
 				
 func take_damage(amount: int = 1):
 	hp -= amount
-
+	emit_signal("boss_health_changed", hp, max_hp)
+	
 	if hp <= 0:
 		die()
 

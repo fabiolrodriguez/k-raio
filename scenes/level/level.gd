@@ -21,6 +21,10 @@ extends Node2D
 @export var boss_scene: PackedScene
 @onready var spawn_manager = $SpawnManager
 
+@onready var boss_health_hud = $scorelayer/bosshud
+@onready var boss_name_label = $scorelayer/bosshud/bossname
+@onready var boss_health_bar = $scorelayer/bosshud/bosshealth
+
 var boss_spawned := false
 
 var score := 0
@@ -108,6 +112,7 @@ func spawn_boss():
 		return
 
 	boss_spawned = true
+	AudioManager.play_boss()
 
 	if spawn_manager != null and spawn_manager.has_method("stop_spawning"):
 		spawn_manager.stop_spawning()
@@ -119,8 +124,29 @@ func spawn_boss():
 	if boss.has_method("set_movement_origin"):
 		boss.set_movement_origin()
 
+	show_boss_health(boss.hp, "AZATOTH")
+
+	if boss.has_signal("boss_health_changed"):
+		boss.boss_health_changed.connect(_on_boss_health_changed)
+
 	if boss.has_signal("boss_defeated"):
 		boss.boss_defeated.connect(_on_boss_defeated)
 		
 func _on_boss_defeated():
-	print("Boss derrotado!")		
+	hide_boss_health()
+	print("Boss derrotado!")
+	
+func show_boss_health(max_hp: int, boss_name: String = "AZATOTH"):
+	boss_health_hud.visible = true
+	boss_name_label.text = boss_name
+	boss_health_bar.max_value = max_hp
+	boss_health_bar.value = max_hp
+
+func update_boss_health(current_hp: int):
+	boss_health_bar.value = current_hp
+
+func hide_boss_health():
+	boss_health_hud.visible = false
+	
+func _on_boss_health_changed(current_hp, max_hp):
+	update_boss_health(current_hp)	

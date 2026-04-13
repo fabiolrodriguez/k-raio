@@ -1,14 +1,15 @@
+ProgressBar
+Label
+Control
 Timer
 Marker2D
 CollisionShape2D
 AnimatedSprite2D
 Area2D
 ColorRect
-Label
 TextureRect
 VBoxContainer
 HBoxContainer
-Control
 Sprite2D
 MarginContainer
 PanelContainer
