@@ -27,6 +27,12 @@ func spawn_enemy():
 		return
 
 	var enemy = scene_to_spawn.instantiate()
+	
+	if "hp" in enemy:
+		enemy.hp *= get_tree().current_scene.hp_multiplier
+
+	if "speed" in enemy:
+		enemy.speed *= get_tree().current_scene.speed_multiplier
 
 	if enemy_suicide_scene != null and scene_to_spawn == enemy_suicide_scene:
 		setup_suicide_enemy(enemy)
@@ -109,3 +115,10 @@ func get_random_spawn_position() -> Vector2:
 	var random_x = randf_range(spawn_margin, screen_size.x - spawn_margin)
 	return Vector2(random_x, -32)		
 		
+func start_spawning():
+	spawn_timer.start()
+	difficulty_timer.start()
+	
+func stop_spawning():
+	spawn_timer.stop()
+	difficulty_timer.stop()	

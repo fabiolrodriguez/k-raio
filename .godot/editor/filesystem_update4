@@ -1,5 +1,8 @@
 res://scenes/level/level.tscn
 res://scenes/level/level.gd
-res://scripts/boss.gd
-res://scenes/enemy/boss.tscn
-res://scripts/audio_manager.gd
+res://scripts/enemy.gd
+res://scripts/enemydiag.gd
+res://scripts/enemysuicide.gd
+res://scripts/enemy_bullet.gd
+res://scripts/spawn_manager.gd
+res://scripts/localization_manager.gd

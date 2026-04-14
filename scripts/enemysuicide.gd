@@ -77,5 +77,6 @@ func _on_body_entered(body):
 		body.die()
 		die(false)
 		
-#func _ready():
+func _ready():
+	add_to_group("enemies")
 	#set_direction(Vector2(0.6, 1))

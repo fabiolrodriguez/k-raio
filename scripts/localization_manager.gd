@@ -24,7 +24,8 @@ var translations = {
 		"controls_move_left": "Mover para a esquerda",
 		"controls_move_right": "Mover para a direita",
 		"controls_confirm": "Confirmar",
-		"controls_pause": "Pausar"		
+		"controls_pause": "Pausar",
+		"round": "REALIDADE"
 	},
 	"en_US": {
 		"menu_start": "START",
@@ -45,7 +46,8 @@ var translations = {
 		"controls_move_left": "Move left",
 		"controls_move_right": "Move right",
 		"controls_confirm": "Confirm",
-		"controls_pause": "Pause"		
+		"controls_pause": "Pause",
+		"round": "REALITY"
 	}
 }
 

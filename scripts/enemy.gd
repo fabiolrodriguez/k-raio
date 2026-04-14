@@ -44,6 +44,7 @@ func _on_body_entered(body: Node2D) -> void:
 		die(false)
 
 func _ready():
+	add_to_group("enemies")
 	if can_shoot:
 		shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	else:

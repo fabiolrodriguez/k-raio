@@ -24,10 +24,21 @@ extends Node2D
 @onready var boss_health_hud = $scorelayer/bosshud
 @onready var boss_name_label = $scorelayer/bosshud/bossname
 @onready var boss_health_bar = $scorelayer/bosshud/bosshealth
+@onready var fade_rect = $scorelayer/blackscreen
+@onready var round_label = $scorelayer/roundlabel
+@onready var final_score = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/scorelabel
+@onready var final_reality = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/reality
 
 var boss_spawned := false
 
 var score := 0
+
+var round := 0
+
+var difficulty_multiplier := 1.0
+var hp_multiplier := 1.0
+var speed_multiplier := 1.0
+var boss_spawn_in_progress := false
 
 func update_texts():
 	restart_button.text = LocalizationManager.tr_key("menu_restart")
@@ -46,8 +57,9 @@ func _ready() -> void:
 	if not LocalizationManager.language_changed.is_connected(update_texts):
 		LocalizationManager.language_changed.connect(update_texts)
 		
-	await get_tree().create_timer(60.0).timeout
-	spawn_boss()		
+	#await get_tree().create_timer(60.0).timeout
+	#spawn_boss()
+	schedule_boss_spawn(60.0)
 			
 func _process(delta: float) -> void:
 	pass
@@ -71,6 +83,8 @@ func update_score_ui():
 
 func game_over():
 	get_tree().paused
+	final_score.text = "SCORE %d" % score
+	final_reality.text = "%s %d" % [LocalizationManager.tr_key("round"), round]
 	game_over_menu.visible = true
 	restart_button.grab_focus()
 
@@ -118,6 +132,7 @@ func spawn_boss():
 		spawn_manager.stop_spawning()
 
 	var boss = boss_scene.instantiate()
+	boss.hp *= hp_multiplier
 	add_child(boss)
 	boss.global_position = Vector2(get_viewport_rect().size.x / 2, -120)
 
@@ -134,7 +149,8 @@ func spawn_boss():
 		
 func _on_boss_defeated():
 	hide_boss_health()
-	print("Boss derrotado!")
+	boss_spawned = false
+	await start_next_round()
 	
 func show_boss_health(max_hp: int, boss_name: String = "AZATOTH"):
 	boss_health_hud.visible = true
@@ -150,3 +166,67 @@ func hide_boss_health():
 	
 func _on_boss_health_changed(current_hp, max_hp):
 	update_boss_health(current_hp)	
+
+func increase_difficulty():
+	round += 1
+
+	hp_multiplier += 0.3
+	speed_multiplier += 0.1
+
+	print("Round:", round)
+	print("HP Mult:", hp_multiplier)
+	print("Speed Mult:", speed_multiplier)
+	
+func fade_to_black():
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "modulate:a", 1.0, 0.5)
+	await tween.finished
+
+func fade_from_black():
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "modulate:a", 0.0, 0.5)
+	await tween.finished
+	
+func start_next_round():
+	await fade_to_black()
+
+	reset_level_state()
+	increase_difficulty()
+
+	await fade_from_black()
+	round_label.text = "%s %d" % [LocalizationManager.tr_key("round"), round]
+	round_label.visible = true
+	await get_tree().create_timer(3.0).timeout
+	round_label.visible = false
+	start_spawning()
+	schedule_boss_spawn(60.0)
+	
+func reset_level_state():
+	# remove todos os inimigos existentes
+	for child in get_children():
+		if child.is_in_group("enemies"):
+			child.queue_free()
+
+	# opcional: remover tiros inimigos também
+	for child in get_children():
+		if child.is_in_group("enemy_bullets"):
+			child.queue_free()
+			
+func start_spawning():
+	if spawn_manager != null:
+		spawn_manager.start_spawning()
+		
+func schedule_boss_spawn(delay: float = 60.0):
+	if boss_spawn_in_progress:
+		return
+
+	boss_spawn_in_progress = true
+	call_deferred("_start_boss_spawn_timer", delay)
+	
+func _start_boss_spawn_timer(delay: float):
+	await get_tree().create_timer(delay).timeout
+
+	if not boss_spawned:
+		spawn_boss()
+
+	boss_spawn_in_progress = false	

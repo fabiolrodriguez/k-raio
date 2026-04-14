@@ -46,6 +46,32 @@ boss_scene = ExtResource("2_pe1ox")
 
 [node name="scorelayer" type="CanvasLayer" parent="." unique_id=1844956064]
 
+[node name="roundlabel" type="Label" parent="scorelayer" unique_id=602717252]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -25.0
+offset_right = 275.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_font_sizes/font_size = 50
+text = "REALITY 1"
+
+[node name="blackscreen" type="ColorRect" parent="scorelayer" unique_id=578835253]
+modulate = Color(0, 0, 0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="scorelabel" type="Label" parent="scorelayer" unique_id=556570682]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -220,6 +246,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
+[node name="scorelabel" type="Label" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1448184319]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_font_sizes/font_size = 22
+text = "SCORE:"
+
 [node name="restart" type="Button" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2147337456]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -241,6 +273,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_vpf64")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wcngd")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xv074")
 text = "QUIT"
+
+[node name="reality" type="Label" parent="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1225186209]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vpf64")
+theme_override_font_sizes/font_size = 22
+text = "REALITY:"
 
 [connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]

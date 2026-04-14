@@ -15,6 +15,7 @@ extends Area2D
 
 
 func _ready():
+	add_to_group("enemies")
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
 func _process(delta):
