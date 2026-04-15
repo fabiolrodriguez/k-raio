@@ -25,7 +25,8 @@ var translations = {
 		"controls_move_right": "Mover para a direita",
 		"controls_confirm": "Confirmar",
 		"controls_pause": "Pausar",
-		"round": "REALIDADE"
+		"round": "REALIDADE",
+		"menu_autofire": "TIRO AUTOMÁTICO"
 	},
 	"en_US": {
 		"menu_start": "START",
@@ -47,7 +48,8 @@ var translations = {
 		"controls_move_right": "Move right",
 		"controls_confirm": "Confirm",
 		"controls_pause": "Pause",
-		"round": "REALITY"
+		"round": "REALITY",
+		"menu_autofire": "AUTOFIRE"
 	}
 }
 

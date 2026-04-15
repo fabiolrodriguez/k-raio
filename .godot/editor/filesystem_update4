@@ -1,7 +1,9 @@
-res://scenes/level/level.tscn
+res://scenes/main_menu/main_menu.tscn
+res://scripts/main_menu.gd
 res://scenes/level/level.gd
-res://scripts/enemy.gd
-res://scripts/enemydiag.gd
+res://scripts/player.gd
+res://scripts/upgrade.gd
+res://scenes/enemy/boss.tscn
 res://scripts/boss.gd
-res://scripts/enemy_bullet.gd
-res://scripts/enemysuicide.gd
+res://scripts/localization_manager.gd
+res://scripts/settings_manager.gd

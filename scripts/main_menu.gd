@@ -11,7 +11,6 @@ extends Node2D
 @onready var volume_slider = $menu/SettingsPanel/MarginContainer/VBoxContainer/VolumeSlider
 @onready var quit_button = $menu/MainPanel/MarginContainer/VBoxContainer/quit
 @onready var settings_button = $menu/MainPanel/MarginContainer/VBoxContainer/settings
-@onready var load_button = $menu/MainPanel/MarginContainer/VBoxContainer/load
 @onready var controls_button = $menu/MainPanel/MarginContainer/VBoxContainer/controls
 @onready var settings_label = $menu/SettingsPanel/MarginContainer/VBoxContainer/TitleLabel
 @onready var resolution_label = $menu/SettingsPanel/MarginContainer/VBoxContainer/ResolutionLabel
@@ -23,6 +22,8 @@ extends Node2D
 @onready var controls_list = $menu/ControlsPanel/MarginContainer/VBoxContainer/ControlsListPanel/MarginContainer/ControlsList
 @onready var controls_title = $menu/ControlsPanel/MarginContainer/VBoxContainer/TitleLabel
 @onready var controls_back_button = $menu/ControlsPanel/MarginContainer/VBoxContainer/BackButton
+@onready var autofire_checkbox = $menu/SettingsPanel/MarginContainer/VBoxContainer/AutoFireCheckbox
+
 
 var bg_music = preload("res://assets/audio/music/piano-bg.mp3")
 
@@ -93,8 +94,7 @@ func sync_language_selector():
 		language_selector.select(0)
 		
 func update_texts():
-	start_button.text = LocalizationManager.tr_key("menu_start")
-	load_button.text = LocalizationManager.tr_key("menu_load")
+	start_button.text = LocalizationManager.tr_key("menu_start") 
 	back_button.text = LocalizationManager.tr_key("menu_back")
 	quit_button.text = LocalizationManager.tr_key("menu_quit")
 	settings_button.text = LocalizationManager.tr_key("menu_settings")
@@ -102,6 +102,7 @@ func update_texts():
 	resolution_label.text = LocalizationManager.tr_key("menu_resolution")
 	language_label.text = LocalizationManager.tr_key("menu_language")
 	settings_label.text = LocalizationManager.tr_key("menu_settings")
+	autofire_checkbox.text = LocalizationManager.tr_key("menu_autofire")
 	fullscreen_checkbox.text = LocalizationManager.tr_key("menu_fullscreen")
 	pause_menu.resume_button.text = LocalizationManager.tr_key("menu_resume")
 	pause_menu.quit_button.text = LocalizationManager.tr_key("menu_quit")
@@ -111,6 +112,7 @@ func sync_settings_ui():
 	fullscreen_checkbox.button_pressed = SettingsManager.fullscreen
 	volume_slider.value = SettingsManager.volume
 	resolution_selector.select(SettingsManager.resolution_index)
+	autofire_checkbox.button_pressed = SettingsManager.auto_fire
 	sync_language_selector()
 
 # Button Sounds and Actions
@@ -173,6 +175,7 @@ func _on_fullscreen_checkbox_toggled(toggled_on: bool) -> void:
 	else:
 		SettingsManager.fscr(false)
 		
+
 func _on_option_button_item_selected(index) -> void:
 	var res = resolutions[index]
 	SettingsManager.set_resolution_from_value(res)
@@ -241,3 +244,10 @@ func open_controls_panel():
 	controls_panel.visible = true
 	populate_controls_panel()
 	controls_back_button.grab_focus()
+
+func _on_auto_fire_checkbox_toggled(toggled_on: bool) -> void:
+	AudioManager.play_click()
+	if toggled_on:
+		SettingsManager.autofire(true)
+	else:
+		SettingsManager.autofire(false)

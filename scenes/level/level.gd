@@ -124,7 +124,8 @@ func update_upgrade_hud():
 	var spread_count = upgrades.get("spread_shot", 0)
 	var speed_count = upgrades.get("speed_up", 0)
 	var fire_rate_count = upgrades.get("fire_rate", 0)
-	var shield_count = upgrades.get("shield", 0)
+	#var shield_count = upgrades.get("shield", 0)
+	var shield_count = player.shield_charges
 
 	spread_label.text = "x%d" % spread_count
 	speed_label.text = "x%d" % speed_count

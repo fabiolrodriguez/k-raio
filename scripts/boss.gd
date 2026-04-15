@@ -16,7 +16,9 @@ signal boss_health_changed(current_hp, max_hp)
 @onready var shoot_point_center = $shootpoint
 @onready var shoot_point_right = $shootpointright
 @onready var shoot_timer = $shoottimer
+@onready var boss_sprite = $texture
 
+var hit_flash_playing := false
 var entered_position := false
 var moving_right := true
 var start_x := 0.0
@@ -51,6 +53,7 @@ func _process(delta):
 				
 func take_damage(amount: int = 1):
 	hp -= amount
+	#play_hit_flash()
 	emit_signal("boss_health_changed", hp, max_hp)
 	
 	if hp <= 0:
@@ -97,3 +100,20 @@ func _on_shoot_timer_timeout():
 
 func set_movement_origin():
 	start_x = global_position.x
+	
+func play_hit_flash():
+	if boss_sprite == null:
+		return
+
+	if hit_flash_playing:
+		return
+
+	hit_flash_playing = true
+
+	var original_modulate = boss_sprite.modulate
+
+	boss_sprite.modulate = Color(1.0, 0.2, 0.2, 0.271)
+	await get_tree().create_timer(0.25).timeout
+
+	boss_sprite.modulate = original_modulate
+	hit_flash_playing = false	

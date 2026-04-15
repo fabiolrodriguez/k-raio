@@ -3,6 +3,7 @@ extends Node
 var volume := 1.0
 var fullscreen := false
 var resolution_index := 0
+var auto_fire := true
 
 var config = ConfigFile.new()
 const SETTINGS_PATH := "user://settings.cfg"
@@ -22,6 +23,7 @@ func save():
 	config.set_value("settings", "fullscreen", fullscreen)
 	config.set_value("settings", "resolution_index", resolution_index)
 	config.set_value("settings", "language", language)
+	config.set_value("settings", "auto_fire", auto_fire)
 
 	config.save(SETTINGS_PATH)
 
@@ -34,6 +36,7 @@ func load_settings():
 	fullscreen = config.get_value("settings", "fullscreen", false)
 	resolution_index = config.get_value("settings", "resolution_index", 0)
 	language = config.get_value("settings", "language", "pt_BR")
+	auto_fire = config.get_value("settings", "auto_fire", true)
 
 func apply_resolution():
 	if resolution_index < 0 or resolution_index >= resolutions.size():
@@ -69,6 +72,11 @@ func set_resolution_from_value(menu_resolution: Vector2i):
 
 func fscr(checkbox):
 	fullscreen = checkbox
+	save()
+	apply()
+	
+func autofire(checkbox):
+	auto_fire = checkbox
 	save()
 	apply()
 

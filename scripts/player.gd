@@ -38,7 +38,21 @@ func _physics_process(delta):
 
 	clamp_to_screen()
 	
-	if Input.is_action_pressed("ui_accept") and can_shoot:
+	#if Input.is_action_pressed("ui_accept") and can_shoot:
+		#can_shoot = false
+		#shoot()
+#
+		#var timer = get_tree().create_timer(fire_rate)
+		#timer.timeout.connect(reset_fire)
+
+	var wants_to_shoot := false
+
+	if SettingsManager.auto_fire:
+		wants_to_shoot = true
+	else:
+		wants_to_shoot = Input.is_action_pressed("ui_accept")
+
+	if wants_to_shoot and can_shoot:
 		can_shoot = false
 		shoot()
 
@@ -69,9 +83,9 @@ func die():
 	# verifica shield antes de morrer
 	if shield_charges > 0:
 		shield_charges -= 1
-		on_shield_hit()
 		update_shield_visual()
 		emit_signal("upgrades_changed")
+		on_shield_hit()
 		return
 
 	is_dead = true
@@ -114,7 +128,18 @@ func spawn_player_bullet(direction: Vector2, x_offset: float = 0.0):
 func on_shield_hit():
 	print("Shield absorveu o dano!")
 
-	# aqui podemos adicionar efeito visual depois	
+	if shield_sprite == null:
+		return
+
+	for i in range(3):
+		shield_sprite.visible = false
+		await get_tree().create_timer(0.08).timeout
+
+		if shield_charges > 0:
+			shield_sprite.visible = true
+		await get_tree().create_timer(0.08).timeout
+
+	update_shield_visual()
 	
 func update_shield_visual():
 	if shield_sprite == null:
