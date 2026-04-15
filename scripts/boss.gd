@@ -24,8 +24,13 @@ var max_hp: int
 
 func _ready():
 	#start_x = global_position.x
-	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	max_hp = hp
+	var game = get_tree().current_scene
+	if game != null and game.has_method("get_boss_fire_interval_for_round"):
+		shoot_timer.wait_time = game.get_boss_fire_interval_for_round()
+
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)	
 
 func _process(delta):
 	if not entered_position:
@@ -76,8 +81,11 @@ func shoot():
 	var bullet = enemy_bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = chosen_point.global_position
-	bullet.direction = Vector2.DOWN			
+	bullet.direction = Vector2.DOWN
 
+	var game = get_tree().current_scene
+	if game != null and game.has_method("get_enemy_bullet_speed_for_round"):
+		bullet.speed = game.get_enemy_bullet_speed_for_round()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("die"):

@@ -45,7 +45,16 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _ready():
 	add_to_group("enemies")
+	#if can_shoot:
+		#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	#else:
+		#shoot_timer.stop()
+
 	if can_shoot:
+		var game = get_tree().current_scene
+		if game != null and game.has_method("get_enemy_fire_interval_for_round"):
+			shoot_timer.wait_time = game.get_enemy_fire_interval_for_round()
+
 		shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	else:
 		shoot_timer.stop()
@@ -56,9 +65,11 @@ func shoot():
 
 	var bullet = enemy_bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
-
 	bullet.global_position = shoot_point.global_position
-	bullet.direction = Vector2.DOWN
+
+	var game = get_tree().current_scene
+	if game != null and game.has_method("get_enemy_bullet_speed_for_round"):
+		bullet.speed = game.get_enemy_bullet_speed_for_round()
 
 func _on_shoot_timer_timeout():
 	shoot()

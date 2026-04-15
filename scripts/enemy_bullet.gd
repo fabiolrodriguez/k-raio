@@ -7,8 +7,11 @@ func _process(delta):
 	#global_position.y += speed * delta
 	global_position += direction * speed * delta
 	
-	if global_position.y > get_viewport_rect().size.y + 32:
-		queue_free()
+	#if global_position.y > get_viewport_rect().size.y + 32:
+		#queue_free()
+	var screen_size = get_viewport_rect().size
+	if global_position.y > screen_size.y + 32 or global_position.x < -32 or global_position.x > screen_size.x + 32:
+		queue_free()		
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("die"):

@@ -14,16 +14,6 @@ var move_direction: Vector2 = Vector2.ZERO
 func set_direction(direction: Vector2):
 	move_direction = direction.normalized()
 
-#func _process(delta):
-	#global_position += move_direction * speed * delta
-#
-	#var screen_size = get_viewport_rect().size
-	#if global_position.y > screen_size.y + 64 or global_position.x < -64 or global_position.x > screen_size.x + 64:
-		#queue_free()
-#
-#func set_direction(direction: Vector2):
-	#move_direction = direction.normalized()
-
 func _process(delta):
 	if move_direction == Vector2.ZERO:
 		return

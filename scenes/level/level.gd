@@ -39,6 +39,24 @@ var difficulty_multiplier := 1.0
 var hp_multiplier := 1.0
 var speed_multiplier := 1.0
 var boss_spawn_in_progress := false
+var boss_base_horizontal_speed := 80.0
+var boss_speed_per_round := 10.0
+
+var boss_base_stop_y := 100.0
+var boss_stop_y_per_round := 20.0
+var boss_max_stop_y_ratio := 0.5
+
+var enemy_bullet_base_speed := 250.0
+var enemy_bullet_speed_per_round := 12.0
+
+var enemy_fire_interval_base := 1.5
+var enemy_fire_interval_reduction_per_round := 0.06
+var enemy_fire_interval_min := 0.45
+
+var boss_fire_interval_base := 0.8
+var boss_fire_interval_reduction_per_round := 0.03
+var boss_fire_interval_min := 0.25
+
 
 func update_texts():
 	restart_button.text = LocalizationManager.tr_key("menu_restart")
@@ -136,6 +154,9 @@ func spawn_boss():
 	add_child(boss)
 	boss.global_position = Vector2(get_viewport_rect().size.x / 2, -120)
 
+	boss.horizontal_speed = get_boss_horizontal_speed_for_round()
+	boss.stop_y = get_boss_stop_y_for_round()
+
 	if boss.has_method("set_movement_origin"):
 		boss.set_movement_origin()
 
@@ -229,4 +250,28 @@ func _start_boss_spawn_timer(delay: float):
 	if not boss_spawned:
 		spawn_boss()
 
-	boss_spawn_in_progress = false	
+	boss_spawn_in_progress = false
+	
+func get_boss_horizontal_speed_for_round() -> float:
+	return boss_base_horizontal_speed + ((round - 1) * boss_speed_per_round)
+
+func get_boss_stop_y_for_round() -> float:
+	var max_stop_y = get_viewport_rect().size.y * boss_max_stop_y_ratio
+	var desired_stop_y = boss_base_stop_y + ((round - 1) * boss_stop_y_per_round)
+
+	return min(desired_stop_y, max_stop_y)	
+	
+func get_enemy_bullet_speed_for_round() -> float:
+	return enemy_bullet_base_speed + ((round) * enemy_bullet_speed_per_round)
+	
+func get_enemy_fire_interval_for_round() -> float:
+	return max(
+		enemy_fire_interval_min,
+		enemy_fire_interval_base - ((round - 1) * enemy_fire_interval_reduction_per_round)
+	)
+
+func get_boss_fire_interval_for_round() -> float:
+	return max(
+		boss_fire_interval_min,
+		boss_fire_interval_base - ((round - 1) * boss_fire_interval_reduction_per_round)
+	)		

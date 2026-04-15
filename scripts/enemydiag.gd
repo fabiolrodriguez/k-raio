@@ -16,8 +16,13 @@ extends Area2D
 
 func _ready():
 	add_to_group("enemies")
-	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	var game = get_tree().current_scene
+	if game != null and game.has_method("get_enemy_fire_interval_for_round"):
+		shoot_timer.wait_time = game.get_enemy_fire_interval_for_round()
 
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	
 func _process(delta):
 	global_position.y += speed * delta
 
@@ -45,17 +50,23 @@ func shoot():
 	if enemy_bullet_scene == null:
 		return
 
-	# tiro esquerda
+	var game = get_tree().current_scene
+	var bullet_speed = 250.0
+
+	if game != null and game.has_method("get_enemy_bullet_speed_for_round"):
+		bullet_speed = game.get_enemy_bullet_speed_for_round()
+
 	var bullet_left = enemy_bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet_left)
 	bullet_left.global_position = shoot_point.global_position
 	bullet_left.direction = Vector2(-0.5, 1).normalized()
+	bullet_left.speed = bullet_speed
 
-	# tiro direita
 	var bullet_right = enemy_bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet_right)
 	bullet_right.global_position = shoot_point.global_position
 	bullet_right.direction = Vector2(0.5, 1).normalized()
+	bullet_right.speed = bullet_speed
 	
 func _on_shoot_timer_timeout():
 	shoot()	
