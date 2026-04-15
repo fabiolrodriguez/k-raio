@@ -12,6 +12,7 @@ func _ready():
 func pause():
 	visible = true
 	get_tree().paused = true
+	AudioManager.weapon_loop_player.stop()
 	resume_button.grab_focus()
 
 func resume():

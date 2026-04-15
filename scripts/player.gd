@@ -21,7 +21,8 @@ var upgrades = {
 var base_fire_rate: float = 0.2
 var base_speed: float = 250.0
 var shield_charges := 0
-
+var weapon_loop_active := false
+@export var shoot_sound: AudioStream
 @onready var shield_sprite = $shield
 
 func _ready():
@@ -38,14 +39,8 @@ func _physics_process(delta):
 
 	clamp_to_screen()
 	
-	#if Input.is_action_pressed("ui_accept") and can_shoot:
-		#can_shoot = false
-		#shoot()
-#
-		#var timer = get_tree().create_timer(fire_rate)
-		#timer.timeout.connect(reset_fire)
-
 	var wants_to_shoot := false
+
 
 	if SettingsManager.auto_fire:
 		wants_to_shoot = true
@@ -59,12 +54,21 @@ func _physics_process(delta):
 		var timer = get_tree().create_timer(fire_rate)
 		timer.timeout.connect(reset_fire)
 
+	if wants_to_shoot:
+		if not weapon_loop_active:
+			AudioManager.start_weapon_loop(shoot_sound)
+			weapon_loop_active = true
+	else:
+		if weapon_loop_active:
+			AudioManager.stop_weapon_loop()
+			weapon_loop_active = false
+
 func clamp_to_screen():
 	global_position.x = clamp(global_position.x, 0, screen_size.x)
 	global_position.y = clamp(global_position.y, 0, screen_size.y)
 	
 func shoot():
-	AudioManager.play_shoot()
+	#AudioManager.play_shoot()
 
 	if upgrades["spread_shot"] > 0:
 		spawn_player_bullet(Vector2.UP, 0)
@@ -87,6 +91,9 @@ func die():
 		emit_signal("upgrades_changed")
 		on_shield_hit()
 		return
+
+	AudioManager.stop_weapon_loop()
+	weapon_loop_active = false
 
 	is_dead = true
 

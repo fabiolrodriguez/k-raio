@@ -1,9 +1,5 @@
 res://scenes/main_menu/main_menu.tscn
-res://scripts/main_menu.gd
-res://scenes/level/level.gd
+res://scripts/audio_manager.gd
 res://scripts/player.gd
-res://scripts/upgrade.gd
-res://scenes/enemy/boss.tscn
-res://scripts/boss.gd
-res://scripts/localization_manager.gd
-res://scripts/settings_manager.gd
+res://scenes/player/player.tscn
+res://scripts/pause_menu.gd

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bk3eqabhw6xy6" path="res://scripts/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://cfs06d8nvl8l8" path="res://scenes/player/bullet.tscn" id="2_gmlin"]
+[ext_resource type="AudioStream" uid="uid://cpij7nvpj8jix" path="res://assets/audio/game/shot.mp3" id="3_0owmy"]
 [ext_resource type="Texture2D" uid="uid://6k6pe23cs7x8" path="res://assets/textures/Passaralho2.png" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dsrqwj1h54pnn" path="res://assets/textures/Flame2.png" id="4_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bf8xclesmflel" path="res://assets/textures/Flame.png" id="5_75vfm"]
@@ -30,6 +31,7 @@ collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_8afob")
 bullet_scene = ExtResource("2_gmlin")
+shoot_sound = ExtResource("3_0owmy")
 
 [node name="texture" type="Sprite2D" parent="." unique_id=94469378]
 texture = ExtResource("3_gmlin")

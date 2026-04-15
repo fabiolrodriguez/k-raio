@@ -7,6 +7,8 @@ var shoot = preload("res://assets/audio/game/shot.mp3")
 var explode = preload("res://assets/audio/game/explode.mp3")
 var boss = preload("res://assets/audio/game/boss.mp3")
 
+var weapon_loop_player: AudioStreamPlayer
+
 @onready var bgm_player = AudioStreamPlayer.new()
 
 @onready var player = AudioStreamPlayer.new()
@@ -14,6 +16,9 @@ var boss = preload("res://assets/audio/game/boss.mp3")
 func _ready():
 	add_child(player)
 	add_child(bgm_player)
+	
+	weapon_loop_player = AudioStreamPlayer.new()
+	add_child(weapon_loop_player)
 
 func play_hover():
 	player.stream = hover_sound
@@ -45,3 +50,17 @@ func play_explode():
 func play_boss():
 	player.stream = boss
 	player.play()	
+
+func start_weapon_loop(sound: AudioStream):
+	if sound == null:
+		return
+
+	if weapon_loop_player.stream != sound:
+		weapon_loop_player.stream = sound
+
+	if not weapon_loop_player.playing:
+		weapon_loop_player.play()
+
+func stop_weapon_loop():
+	if weapon_loop_player.playing:
+		weapon_loop_player.stop()
