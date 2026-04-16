@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://h5v1ul580ofa" path="res://scripts/save_manager.gd" id="10_x2yjq"]
 [ext_resource type="PackedScene" uid="uid://dap3o436pbq6y" path="res://scenes/pause_menu/pause_menu.tscn" id="11_lqpn7"]
 [ext_resource type="Script" uid="uid://b1eqwmdtnqpvp" path="res://scripts/controls_manager.gd" id="12_qel0l"]
+[ext_resource type="AudioStream" uid="uid://cf3jrjgy3a53c" path="res://assets/audio/game/shoot2.ogg" id="12_rrgl4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1b6gl"]
 bg_color = Color(0.9607843, 0.69411767, 0.19215687, 1)
@@ -356,6 +357,7 @@ script = ExtResource("8_4xg86")
 script = ExtResource("10_x2yjq")
 
 [node name="PauseMenu" parent="." unique_id=1909309180 instance=ExtResource("11_lqpn7")]
+shoot = ExtResource("12_rrgl4")
 
 [node name="ControlsManager" type="Node" parent="." unique_id=1137148229]
 script = ExtResource("12_qel0l")

@@ -101,6 +101,7 @@ func update_score_ui():
 
 func game_over():
 	get_tree().paused
+	AudioManager.stop_weapon_loop()
 	final_score.text = "SCORE %d" % score
 	final_reality.text = "%s %d" % [LocalizationManager.tr_key("round"), round]
 	game_over_menu.visible = true

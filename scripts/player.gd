@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @onready var shoot_point = $shootpoint
 @export var bullet_scene: PackedScene
-@export var fire_rate: float = 0.2
+@export var fire_rate: float = 0.3
 var is_dead := false
 var can_shoot := true
 var screen_size: Vector2
@@ -24,11 +24,14 @@ var shield_charges := 0
 var weapon_loop_active := false
 @export var shoot_sound: AudioStream
 @onready var shield_sprite = $shield
+var wants_to_shoot := false
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	shield_sprite.visible = false
 func _physics_process(delta):
+	if is_dead:
+		return
 	var input_vector = Vector2.ZERO
 
 	input_vector.x = Input.get_axis("ui_left", "ui_right")
@@ -39,9 +42,6 @@ func _physics_process(delta):
 
 	clamp_to_screen()
 	
-	var wants_to_shoot := false
-
-
 	if SettingsManager.auto_fire:
 		wants_to_shoot = true
 	else:
@@ -82,6 +82,7 @@ func reset_fire():
 
 func die():
 	if is_dead:
+		AudioManager.stop_weapon_loop()
 		return
 		
 	# verifica shield antes de morrer
@@ -92,13 +93,14 @@ func die():
 		on_shield_hit()
 		return
 
-	AudioManager.stop_weapon_loop()
 	weapon_loop_active = false
 
 	is_dead = true
 
 	var game = get_tree().current_scene
 	if game != null and game.has_method("game_over"):
+		wants_to_shoot = false
+		AudioManager.stop_weapon_loop()
 		game.game_over()
 
 	queue_free()
