@@ -78,4 +78,6 @@ func _on_body_entered(body):
 		
 func _ready():
 	add_to_group("enemies")
-	#set_direction(Vector2(0.6, 1))
+	var game = get_tree().current_scene
+	if game != null and game.has_method("get_enemy_score_for_round"):
+		score_value = game.get_enemy_score_for_round()	

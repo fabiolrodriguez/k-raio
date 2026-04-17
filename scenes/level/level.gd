@@ -32,6 +32,11 @@ extends Node2D
 @export var level_bgm: AudioStream
 @export var boss_bgm: AudioStream
 
+var enemy_score_base := 100
+var enemy_score_scale_per_round := 0.15
+var boss_score_base := 3000
+var boss_score_scale_per_round := 0.25
+
 var boss_spawned := false
 
 var score := 0
@@ -54,7 +59,7 @@ var enemy_bullet_speed_per_round := 12.0
 
 var enemy_fire_interval_base := 1.5
 var enemy_fire_interval_reduction_per_round := 0.06
-var enemy_fire_interval_min := 0.45
+var enemy_fire_interval_min := 0.10
 
 var boss_fire_interval_base := 0.8
 var boss_fire_interval_reduction_per_round := 0.03
@@ -168,6 +173,7 @@ func spawn_boss():
 
 	boss.horizontal_speed = get_boss_horizontal_speed_for_round()
 	boss.stop_y = get_boss_stop_y_for_round()
+	boss.score_value = get_boss_score_for_round()
 
 	if boss.has_method("set_movement_origin"):
 		boss.set_movement_origin()
@@ -290,4 +296,10 @@ func get_boss_fire_interval_for_round() -> float:
 	return max(
 		boss_fire_interval_min,
 		boss_fire_interval_base - ((round - 1) * boss_fire_interval_reduction_per_round)
-	)		
+	)
+	
+func get_enemy_score_for_round() -> int:
+	return int(enemy_score_base * (1.0 + (round - 1) * enemy_score_scale_per_round))
+	
+func get_boss_score_for_round() -> int:
+	return int(boss_score_base * (1.0 + (round - 1) * boss_score_scale_per_round))		

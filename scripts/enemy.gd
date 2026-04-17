@@ -55,13 +55,13 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _ready():
 	add_to_group("enemies")
-	#if can_shoot:
-		#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
-	#else:
-		#shoot_timer.stop()
-
+	
+	var game = get_tree().current_scene
+	
+	if game != null and game.has_method("get_enemy_score_for_round"):
+		score_value = game.get_enemy_score_for_round()	
+		
 	if can_shoot:
-		var game = get_tree().current_scene
 		if game != null and game.has_method("get_enemy_fire_interval_for_round"):
 			shoot_timer.wait_time = game.get_enemy_fire_interval_for_round()
 

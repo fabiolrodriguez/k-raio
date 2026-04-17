@@ -16,8 +16,12 @@ extends Area2D
 
 func _ready():
 	add_to_group("enemies")
-	#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	
 	var game = get_tree().current_scene
+	
+	if game != null and game.has_method("get_enemy_score_for_round"):
+		score_value = game.get_enemy_score_for_round()	
+	
 	if game != null and game.has_method("get_enemy_fire_interval_for_round"):
 		shoot_timer.wait_time = game.get_enemy_fire_interval_for_round()
 
