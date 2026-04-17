@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dbd4866pu6ldg" path="res://assets/textures/boss1.png" id="1_vefcp"]
 [ext_resource type="PackedScene" uid="uid://chdtjjjsc660n" path="res://scenes/enemy/enemy_bullet.tscn" id="2_b0cli"]
 [ext_resource type="Texture2D" uid="uid://dcwdekqm4upvh" path="res://assets/textures/boss2.png" id="2_e3jr6"]
+[ext_resource type="PackedScene" uid="uid://cdawwuxpjyk8j" path="res://scenes/enemy/explosion.tscn" id="3_40x6t"]
 [ext_resource type="Texture2D" uid="uid://t4uuapd4wglb" path="res://assets/textures/boss3.png" id="3_b0cli"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_40x6t"]
@@ -31,6 +32,7 @@ collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_e3jr6")
 enemy_bullet_scene = ExtResource("2_b0cli")
+explosion_scene = ExtResource("3_40x6t")
 
 [node name="texture" type="AnimatedSprite2D" parent="." unique_id=1974622876]
 scale = Vector2(2, 2)

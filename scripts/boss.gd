@@ -17,6 +17,7 @@ signal boss_health_changed(current_hp, max_hp)
 @onready var shoot_point_right = $shootpointright
 @onready var shoot_timer = $shoottimer
 @onready var boss_sprite = $texture
+@export var explosion_scene: PackedScene
 
 var hit_flash_playing := false
 var entered_position := false
@@ -60,7 +61,14 @@ func take_damage(amount: int = 1):
 		die()
 
 func die():
-	AudioManager.play_explode()
+	AudioManager.play_boss_died()
+	if explosion_scene != null:
+		var explosion = explosion_scene.instantiate()
+		get_tree().current_scene.add_child(explosion)
+		explosion.global_position = global_position	
+		get_tree().current_scene.add_child(explosion)
+		explosion.global_position = global_position	
+				
 
 	var game = get_tree().current_scene
 	if game != null and game.has_method("add_score"):

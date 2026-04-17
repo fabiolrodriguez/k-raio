@@ -8,6 +8,7 @@ extends Area2D
 @export var upgrade_pickup_scene: PackedScene
 @export var drop_chance: float = 0.15
 @export var possible_upgrades: Array[String] = ["spread_shot", "speed_up", "fire_rate", "shield"]
+@export var explosion_scene: PackedScene
 
 var move_direction: Vector2 = Vector2.ZERO
 
@@ -52,7 +53,15 @@ func try_drop_upgrade():
 
 func die(give_score: bool = true):
 	AudioManager.play_explode()
-
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.3,1.3), 0.02)
+	tween.tween_property(self, "modulate:a", 0.0, 0.1)
+	await tween.finished
+	if explosion_scene != null:
+		var explosion = explosion_scene.instantiate()
+		get_tree().current_scene.add_child(explosion)
+		explosion.global_position = global_position	
+		
 	if give_score:
 		var game = get_tree().current_scene
 		if game != null and game.has_method("add_score"):

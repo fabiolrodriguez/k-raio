@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dq7wx6ueevh3e" path="res://scripts/main_menu.gd" id="1_5seab"]
 [ext_resource type="FontFile" uid="uid://b2ikk0lshckln" path="res://assets/fonts/PublicPixel-rv0pA.ttf" id="1_fsom3"]
-[ext_resource type="Texture2D" uid="uid://cgfe2rybuajqh" path="res://assets/textures/background/2.png" id="2_5seab"]
-[ext_resource type="Texture2D" uid="uid://dxnbktpwj7mw6" path="res://assets/textures/background/3.png" id="3_4xg86"]
-[ext_resource type="Texture2D" uid="uid://b2ggxfqi1v7f2" path="res://assets/textures/background/1.png" id="4_3ovsr"]
-[ext_resource type="Texture2D" uid="uid://ijvojrr57n0i" path="res://assets/textures/background/4.png" id="4_thkx5"]
+[ext_resource type="Texture2D" uid="uid://4n4j5nf5br8d" path="res://assets/textures/bg.png" id="2_x2yjq"]
+[ext_resource type="FontFile" uid="uid://cl3fpis2yr6vx" path="res://assets/fonts/Metal Lord.otf" id="3_lqpn7"]
 [ext_resource type="Script" uid="uid://dt6ffye8uwn5s" path="res://scripts/audio_manager.gd" id="6_3ovsr"]
 [ext_resource type="Script" uid="uid://xhwf0embwhrv" path="res://scripts/localization_manager.gd" id="8_4xg86"]
 [ext_resource type="Script" uid="uid://dohklr0erriiu" path="res://scripts/settings_manager.gd" id="8_thkx5"]
@@ -92,24 +90,20 @@ script = ExtResource("1_5seab")
 [node name="Background" type="CanvasLayer" parent="." unique_id=1122845074]
 
 [node name="1" type="Sprite2D" parent="Background" unique_id=1791641294]
-position = Vector2(642, 361)
-scale = Vector2(2.229167, 2.2407408)
-texture = ExtResource("4_3ovsr")
+position = Vector2(644.5, 375.99997)
+scale = Vector2(1.2744141, 1.0175781)
+texture = ExtResource("2_x2yjq")
 
-[node name="2" type="Sprite2D" parent="Background" unique_id=758473074]
-position = Vector2(639.49994, 359.5)
-scale = Vector2(2.2170138, 2.2314816)
-texture = ExtResource("2_5seab")
-
-[node name="3" type="Sprite2D" parent="Background" unique_id=816204756]
-position = Vector2(640.5, 359.5)
-scale = Vector2(2.2170138, 2.2314816)
-texture = ExtResource("3_4xg86")
-
-[node name="4" type="Sprite2D" parent="Background" unique_id=1371612137]
-position = Vector2(638.99994, 361)
-scale = Vector2(2.2291663, 2.2407408)
-texture = ExtResource("4_thkx5")
+[node name="GameTitle" type="Label" parent="Background" unique_id=1050126382]
+offset_left = 515.0
+offset_top = 15.0
+offset_right = 764.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0.71885663, 0, 0.036534607, 1)
+theme_override_fonts/font = ExtResource("3_lqpn7")
+theme_override_font_sizes/font_size = 80
+text = "K-RAIO"
+horizontal_alignment = 1
 
 [node name="menu" type="CanvasLayer" parent="." unique_id=1566337340]
 

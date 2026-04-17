@@ -29,6 +29,9 @@ extends Node2D
 @onready var final_score = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/scorelabel
 @onready var final_reality = $gameover/gameoverpanel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/reality
 
+@export var level_bgm: AudioStream
+@export var boss_bgm: AudioStream
+
 var boss_spawned := false
 
 var score := 0
@@ -78,6 +81,11 @@ func _ready() -> void:
 	#await get_tree().create_timer(60.0).timeout
 	#spawn_boss()
 	schedule_boss_spawn(60.0)
+	AudioManager.switch_to_bgm(level_bgm)
+	AudioManager.set_bgm_volume(-5.0)
+	AudioManager.set_boss_bgm_volume(-4.0)
+	AudioManager.set_weapon_volume(-3.0)
+
 			
 func _process(delta: float) -> void:
 	pass
@@ -100,7 +108,8 @@ func update_score_ui():
 	score_label.text = "SCORE %d" % score
 
 func game_over():
-	get_tree().paused
+	#get_tree().paused
+	get_tree().paused = true
 	AudioManager.stop_weapon_loop()
 	final_score.text = "SCORE %d" % score
 	final_reality.text = "%s %d" % [LocalizationManager.tr_key("round"), round]
@@ -113,7 +122,8 @@ func _on_quit_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	AudioManager.play_click()
-	game_over_menu.visible = true
+	get_tree().paused = false
+	game_over_menu.visible = false
 	get_tree().reload_current_scene()
 	
 func update_upgrade_hud():
@@ -146,7 +156,7 @@ func spawn_boss():
 		return
 
 	boss_spawned = true
-	AudioManager.play_boss()
+	AudioManager.switch_to_boss_bgm(boss_bgm)
 
 	if spawn_manager != null and spawn_manager.has_method("stop_spawning"):
 		spawn_manager.stop_spawning()
@@ -173,6 +183,7 @@ func spawn_boss():
 func _on_boss_defeated():
 	hide_boss_health()
 	boss_spawned = false
+	AudioManager.switch_to_bgm(level_bgm)
 	await start_next_round()
 	
 func show_boss_health(max_hp: int, boss_name: String = "AZATOTH"):
@@ -219,7 +230,7 @@ func start_next_round():
 	await fade_from_black()
 	round_label.text = "%s %d" % [LocalizationManager.tr_key("round"), round]
 	round_label.visible = true
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(3.0, false).timeout
 	round_label.visible = false
 	start_spawning()
 	schedule_boss_spawn(60.0)
@@ -240,6 +251,7 @@ func start_spawning():
 		spawn_manager.start_spawning()
 		
 func schedule_boss_spawn(delay: float = 60.0):
+
 	if boss_spawn_in_progress:
 		return
 
@@ -247,8 +259,10 @@ func schedule_boss_spawn(delay: float = 60.0):
 	call_deferred("_start_boss_spawn_timer", delay)
 	
 func _start_boss_spawn_timer(delay: float):
-	await get_tree().create_timer(delay).timeout
-
+		
+	#await get_tree().create_timer(delay).timeout
+	await get_tree().create_timer(delay, false).timeout
+	
 	if not boss_spawned:
 		spawn_boss()
 

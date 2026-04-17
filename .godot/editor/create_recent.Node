@@ -1,4 +1,6 @@
 Label
+GPUParticles2D
+Node2D
 ColorRect
 ProgressBar
 Control
@@ -10,5 +12,3 @@ Area2D
 TextureRect
 VBoxContainer
 HBoxContainer
-Sprite2D
-MarginContainer

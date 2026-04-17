@@ -1,0 +1,14 @@
+res://scenes/enemy/explosion.tscn
+res://scripts/enemy.gd
+res://scripts/explosion.gd
+res://scenes/enemy/enemy.tscn
+res://scripts/enemydiag.gd
+res://scenes/enemy/enemydiag.tscn
+res://scripts/enemysuicide.gd
+res://scripts/boss.gd
+res://scenes/enemy/boss.tscn
+res://scripts/audio_manager.gd
+res://scenes/level/level.gd
+res://scenes/main_menu/main_menu.tscn
+res://scenes/level/level.tscn
+res://scripts/pause_menu.gd

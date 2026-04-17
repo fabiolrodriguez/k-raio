@@ -34,6 +34,7 @@ func _on_quit_pressed() -> void:
 	AudioManager.play_click()
 	get_tree().paused = false
 	AudioManager.stop_weapon_loop()
+	AudioManager.stop_bgm()
 	visible = false
 	get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")
 

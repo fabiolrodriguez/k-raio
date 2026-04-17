@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cdawwuxpjyk8j"]
+
+[ext_resource type="Script" uid="uid://dfdohhpj1gbns" path="res://scripts/explosion.gd" id="1_ce2vp"]
+[ext_resource type="Texture2D" uid="uid://phu0b5ag2uao" path="res://assets/textures/blood.png" id="1_lfff1"]
+
+[sub_resource type="Gradient" id="Gradient_lfff1"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ce2vp"]
+gradient = SubResource("Gradient_lfff1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ce2vp"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 150.54
+initial_velocity_max = 155.92
+gravity = Vector3(0, -1, 0)
+color_ramp = SubResource("GradientTexture1D_ce2vp")
+
+[node name="Node2D" type="Node2D" unique_id=965667623]
+script = ExtResource("1_ce2vp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=648931882]
+scale = Vector2(2, 2)
+emitting = false
+amount = 20
+texture = ExtResource("1_lfff1")
+lifetime = 0.09999999999999999
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ce2vp")

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjh12ow4nv6oc" path="res://scenes/player/upgrade.tscn" id="3_7fgoa"]
 [ext_resource type="Texture2D" uid="uid://buquifn4o7w8g" path="res://assets/textures/PomboBravo.png" id="3_tq3bj"]
 [ext_resource type="Texture2D" uid="uid://dewvfh85fd02c" path="res://assets/textures/PomboBravo2.png" id="4_7fgoa"]
+[ext_resource type="PackedScene" uid="uid://cdawwuxpjyk8j" path="res://scenes/enemy/explosion.tscn" id="4_tk4x4"]
 [ext_resource type="Texture2D" uid="uid://doqph3gp416cv" path="res://assets/textures/PomboBrtavo3.png" id="5_tk4x4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tk4x4"]
@@ -34,6 +35,7 @@ script = ExtResource("1_jnesn")
 enemy_bullet_scene = ExtResource("2_1s7nw")
 upgrade_pickup_scene = ExtResource("3_7fgoa")
 drop_chance = 0.1
+explosion_scene = ExtResource("4_tk4x4")
 
 [node name="enemy" type="AnimatedSprite2D" parent="." unique_id=243097138]
 scale = Vector2(1.3, 1.3)
